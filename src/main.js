@@ -9,12 +9,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+    res.send('Backend Works!');
+});
 app.use('/api', apiRouter);
 app.use('/session', sessionRouter);
 
 connectToDatabase().then(() => {
     app.listen(config.port, () => {
-        console.log(`Server is running on http://localhost:${config.port}`);
+        console.log(`Server is running...`);
     });
 }).catch((error) => {
     console.error('Database connection failed:', error);

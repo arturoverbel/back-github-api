@@ -3,10 +3,6 @@ import GithubService from '../service/github.service.js';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.send('Backend Works!');
-});
-
 router.get('/user/:username', async (req, res) => {
     const username = req.params.username;
     const githubService = new GithubService();
