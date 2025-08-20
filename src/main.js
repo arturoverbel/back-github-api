@@ -17,7 +17,7 @@ app.use('/session', sessionRouter);
 
 connectToDatabase().then(() => {
     app.listen(config.port, () => {
-        console.log(`Server is running...`);
+        console.log(`Server is running on PORT ${config.port}`);
     });
 }).catch((error) => {
     console.error('Database connection failed:', error);
