@@ -1,11 +1,14 @@
+import cors from 'cors';
 import express from 'express';
-import config from './config.js';
+
 import { connectToDatabase } from './utils/database.js';
-import apiRouter from './router/api.router.js';
 import sessionRouter from './router/session.router.js';
 import { authMiddleware } from './utils/jwt.js';
+import apiRouter from './router/api.router.js';
+import config from './config.js';
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
