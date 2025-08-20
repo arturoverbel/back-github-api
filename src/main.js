@@ -1,6 +1,9 @@
 import express from 'express';
 import config from './config.js';
 import GithubService from './service/github.service.js';
+import { connectToDatabase } from './utils/database.js';
+import { User } from './model/user.model.js';
+import { authMiddleware, generateToken } from './utils/jwt.js';
 
 const app = express();
 
@@ -30,6 +33,38 @@ app.get('/user/:username', async (req, res) => {
 });
 
 
-app.listen(config.port, () => {
-    console.log(`Server is running on http://localhost:${config.port}`);
+app.post('/register', async (req, res) => {
+    const user = req.body
+
+    const result = await User.create(user)
+    console.log({result})
+    const access_token = generateToken(result)
+
+    res.send({status: 'success', access_token})
+})
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body
+
+    const user = await User.findOne({email, password})
+    if(!user) return res.status(400).send({status: 'error', error: 'Invalid credentials'})
+
+    const access_token = generateToken(user)
+
+    res.send({status: 'success', access_token})
+})
+
+app.get('/private', authMiddleware, (req, res) => {
+    res.send({status: 'success', payload: req.user})
+
+})
+
+
+
+connectToDatabase().then(() => {
+    app.listen(config.port, () => {
+        console.log(`Server is running on http://localhost:${config.port}`);
+    });
+}).catch((error) => {
+    console.error('Database connection failed:', error);
 });
