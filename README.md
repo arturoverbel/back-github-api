@@ -16,7 +16,7 @@ Swagger Documentation:
 
 ## 🖥️ Frontend URL
 The frontend client that consumes this backend is available at:  
-**<YOUR_FRONTEND_URL>**
+**https://68a69934c2778511a4eda598--rococo-profiterole-5ce870.netlify.app/login**
 
 ---
 
@@ -75,9 +75,5 @@ The backend uses JWT tokens for authentication.
 Tokens are returned to the frontend after login/registration.
 
 No cookies are used; session management is handled completely on the frontend by storing the JWT.
-
-## 📚 API Docs
-
-https://back-github.arturoverbel.com/docs
 
 
