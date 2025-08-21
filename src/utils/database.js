@@ -10,11 +10,11 @@ export const connectToDatabase = async () => {
   try {
     console.log(config)
     const sequelize = new Sequelize(
-      config.databaseName,
-      config.databaseUser,
-      config.databasePassword, {
-        host: config.databaseHost,
-        port: config.databasePort,
+      config.database.name,
+      config.database.user,
+      config.database.password, {
+        host: config.database.host,
+        port: config.database.port,
         dialect: 'postgres'
       }
     );
