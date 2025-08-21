@@ -12,6 +12,6 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser
     },
-    ignores: ["src/config.js"]
+    ignores: ["src/config.js", "docs/swagger.js"]
   },
 ]);
